@@ -1,0 +1,56 @@
+/* Global fonts */
+body, h1, h2, h3, .module h2 {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Header Gradient */
+#header {
+    background: linear-gradient(to right, #0ea5e9, #6366f1);
+    color: white !important;
+}
+
+/* Sidebar */
+#sidebar {
+    background:#1e3a8a !important;
+    color:white !important;
+}
+
+/* Table rows hover */
+#changelist-form table tr:hover {
+    background: rgba(14,165,233,0.08);
+}
+
+/* Buttons */
+.btn-edit, input[type=submit], .addlink {
+    background: linear-gradient(to right, #38bdf8,#6366f1);
+    color:white !important;
+    border-radius:8px;
+    border:none;
+    padding:6px 12px;
+    font-weight:600;
+}
+
+.btn-delete {
+    background: linear-gradient(to right, #f87171,#ef4444);
+    color:white !important;
+    border-radius:8px;
+    padding:6px 12px;
+    font-weight:600;
+}
+
+/* Badges */
+.badge-active {
+    background:#10b981; color:white; padding:4px 10px; border-radius:999px;
+}
+.badge-inactive {
+    background:#ef4444; color:white; padding:4px 10px; border-radius:999px;
+}
+
+/* Inline cards */
+.inline-group {
+    background: linear-gradient(180deg,#f0f9ff,#ffffff);
+    border-radius:8px;
+    padding:12px;
+    margin-bottom:10px;
+    border:1px solid #c7d2fe;
+}

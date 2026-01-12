@@ -1,0 +1,328 @@
+{% extends 'courses/base.html' %}
+{% load static %}
+{% load course_custom_tags %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+<style>
+/* ===== BODY & BACKGROUND ===== */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    color: #1f2937;
+    overflow-x: hidden;
+    position: relative;
+    background: linear-gradient(120deg, #e0f2fe, #f0f9ff, #f0f4ff);
+    background-size: 400% 400%;
+    animation: slowGradient 25s ease infinite;
+}
+@keyframes slowGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== FLOATING PARTICLES ===== */
+.bg-particle {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: rgba(14,165,233,0.35);
+    border-radius: 50%;
+    animation: particleMove 12s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+@keyframes particleMove {
+    0%   { transform: translateY(0) translateX(0); opacity: 1; }
+    50%  { transform: translateY(-160px) translateX(60px); opacity: 0.4; }
+    100% { transform: translateY(0) translateX(0); opacity: 1; }
+}
+
+/* ===== PROFILE CARD ===== */
+.profile-card {
+    max-width: 750px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-radius: 25px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    margin: 60px auto;
+    padding: 40px 35px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.profile-card img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 5px solid #0ea5e9;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.profile-card h2 {
+    margin-bottom: 15px;
+    font-weight: 900;
+    color: #0d47a1;
+    font-size: 28px;
+}
+
+/* ===== INFO FIELDS ===== */
+.info-item {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-item i {
+    width: 30px;
+    text-align: center;
+    color: #0ea5e9;
+    margin-right: 12px;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #555;
+    min-width: 130px;
+}
+
+.info-value {
+    color: #222;
+    flex: 1;
+}
+
+.info-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    display: inline-block;
+    margin: 10px 8px;
+    padding: 12px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+
+.btn-edit { background: #0ea5e9; }
+.btn-password { background: #0284c7; }
+.btn-logout { background: #ef4444; }
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* ===== ENROLLED COURSES SECTION ===== */
+.enrolled-section {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+.enrolled-section h3 {
+    font-size: 24px;
+    color: #0d47a1;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.courses-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+}
+
+.course-card-profile {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(14,165,233,0.25);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+}
+
+.course-card-profile img {
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.course-card-profile:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.05);
+}
+
+.course-card-profile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 28px 60px rgba(0,0,0,0.15);
+}
+
+.course-card-body {
+    padding: 18px;
+    text-align: center;
+    position: relative;
+}
+
+.course-card-body h5 {
+    color: #0ea5e9;
+    font-weight: 700;
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+}
+
+.course-card-footer {
+    padding: 18px 16px 20px;
+}
+
+.course-card-footer .btn-start {
+    width: 100%;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background: linear-gradient(90deg, #0ea5e9, #0284c7);
+    color: white;
+}
+
+.course-card-footer .btn-start:hover {
+    background: linear-gradient(90deg, #0284c7, #0ea5e9);
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 767px) {
+    .profile-card { margin: 40px 20px; padding: 30px 20px; }
+    .info-label { min-width: 100px; }
+    .courses-container { gap: 15px; justify-content: center; }
+}
+</style>
+{% endblock %}
+
+{% block js %}
+<script>
+/* Floating background particles */
+for (let i=0; i<40; i++){
+    const p = document.createElement('div');
+    p.className = 'bg-particle';
+    p.style.top = Math.random()*100 + '%';
+    p.style.left = Math.random()*100 + '%';
+    p.style.width = Math.random()*6 + 4 + 'px';
+    p.style.height = p.style.width;
+    p.style.animationDuration = 6 + Math.random()*6 + 's';
+    document.body.appendChild(p);
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- PROFILE SECTION -->
+<div class="profile-card animate__animated animate__fadeIn">
+
+    {% if additional_info.profile_picture %}
+        <img src="{{ additional_info.profile_picture.url }}" alt="Profile Picture">
+    {% else %}
+        <img src="https://via.placeholder.com/150" alt="Profile Picture">
+    {% endif %}
+
+    <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+
+    <div class="info-item">
+        <i class="fas fa-user"></i>
+        <div class="info-label">Username:</div>
+        <div class="info-value">{{ user.username }}</div>
+    </div>
+    <div class="info-item">
+        <i class="fas fa-envelope"></i>
+        <div class="info-label">Email:</div>
+        <div class="info-value">{{ user.email }}</div>
+    </div>
+    <div class="info-item">
+        <i class="fas fa-home"></i>
+        <div class="info-label">Address:</div>
+        <div class="info-value">{{ additional_info.address|default:"Not Provided" }}</div>
+    </div>
+    <div class="info-item">
+        <i class="fas fa-phone"></i>
+        <div class="info-label">Phone:</div>
+        <div class="info-value">{{ additional_info.phone_number|default:"Not Provided" }}</div>
+    </div>
+    <div class="info-item">
+        <i class="fas fa-school"></i>
+        <div class="info-label">School:</div>
+        <div class="info-value">{{ additional_info.school|default:"Not Provided" }}</div>
+    </div>
+    <div class="info-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <div class="info-label">District:</div>
+        <div class="info-value">{{ additional_info.district|default:"Not Provided" }}</div>
+    </div>
+    <div class="info-item">
+        <i class="fas fa-map-pin"></i>
+        <div class="info-label">Upazilla:</div>
+        <div class="info-value">{{ additional_info.upazilla|default:"Not Provided" }}</div>
+    </div>
+    <div class="info-item">
+        <i class="fas fa-calendar-alt"></i>
+        <div class="info-label">Batch Year:</div>
+        <div class="info-value">{{ additional_info.batch_year|default:"Not Provided" }}</div>
+    </div>
+
+    <div style="margin-top:25px;">
+        <a href="{% url 'edit_profile' %}" class="btn btn-edit"><i class="fas fa-edit"></i> Edit Profile</a>
+        <a href="{% url 'password_change' %}" class="btn btn-password"><i class="fas fa-key"></i> Reset Password</a>
+        <a href="{% url 'logout' %}" class="btn btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+</div>
+
+<!-- ENROLLED COURSES SECTION -->
+<div class="enrolled-section animate__animated animate__fadeIn">
+    <h3>Enrolled Courses</h3>
+    {% if user_courses %}
+        <div class="courses-container">
+            {% for uc in user_courses %}
+            <div class="course-card-profile">
+                <img src="{{ uc.course.thumbnail.url }}" alt="{{ uc.course.name }}">
+                <div class="course-card-body">
+                    <h5>{{ uc.course.name }}</h5>
+                </div>
+                <div class="course-card-footer">
+                    <a href="/course/{{ uc.course.slug }}" class="btn-start" style='padding:10px 12px'>Start Course</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p style="text-align:center; font-size:1.1rem; color:#555;">You have not enrolled in any courses yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

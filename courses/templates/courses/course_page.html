@@ -1,0 +1,307 @@
+{% extends 'courses/base.html' %}
+{% load course_custom_tags %}
+{% load static %}
+{% block title %}{{ course.name }}{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'courses/css/scrollbar.css' %}">
+
+<style>
+/* =======================
+   GLOBAL BACKGROUND
+======================= */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+    background: linear-gradient(120deg, #f0f4ff, #e0f2ff, #f0f9ff);
+    background-size: 400% 400%;
+    animation: slowGradient 25s ease infinite;
+    color: #1f2937;
+}
+
+@keyframes slowGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* =======================
+   BACKGROUND PARTICLES
+======================= */
+.bg-particle {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: rgba(14,165,233,0.35);
+    border-radius: 50%;
+    animation: particleMove 10s linear infinite;
+    pointer-events: none;
+    z-index: 1; /* video-wrapper-এর নিচে থাকবে */
+}
+
+@keyframes particleMove {
+    0%   { transform: translateY(0) translateX(0); opacity: 1; }
+    50%  { transform: translateY(-160px) translateX(60px); opacity: 0.4; }
+    100% { transform: translateY(0) translateX(0); opacity: 1; }
+}
+
+.mouse-particle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(14,165,233,0.45);
+    pointer-events: none;
+    z-index: 2;
+    animation: fadeOut 1s linear forwards;
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; transform: scale(2); }
+}
+
+/* =======================
+   VIDEO PLAYER
+======================= */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    margin-bottom: 15px;
+    z-index: 2; /* particles এর উপরে থাকবে */
+}
+.video-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* =======================
+   LECTURE LIST PREMIUM
+======================= */
+#video_list {
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: inset 0 4px 18px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+#video_list:hover {
+    box-shadow: inset 0 6px 22px rgba(0,0,0,0.15);
+}
+
+/* Scrollbar */
+#video_list::-webkit-scrollbar {
+    width: 10px;
+}
+#video_list::-webkit-scrollbar-track {
+    background: transparent;
+}
+#video_list::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #0ea5e9, #0284c7);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+#video_list::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0284c7, #0ea5e9);
+}
+
+/* Lecture Items */
+.list-group-item {
+    border-radius: 14px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    padding: 14px 16px;
+    background: #f9fafb;
+    cursor: pointer;
+    transition: all 0.3s ease, transform 0.2s ease;
+}
+.list-group-item:hover {
+    background: linear-gradient(90deg, #e0f2fe, #bae6fd);
+    transform: translateX(4px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+.list-group-item.active-video-link-bg {
+    background: linear-gradient(90deg, #0ea5e9, #0284c7);
+    color: #fff !important;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+.no-preview {
+    color: #9ca3af !important;
+    cursor: not-allowed;
+}
+.badge-locked {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    background: #9ca3af;
+    color: white;
+}
+
+/* =======================
+   COURSE DETAILS PREMIUM
+======================= */
+.card {
+    position: relative;
+    z-index: 2; /* particles এর উপরে থাকবে */
+    border-radius: 20px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    border: 1px solid rgba(14,165,233,0.3);
+    margin-bottom: 20px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+.card:hover {
+    box-shadow: 0 28px 50px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+}
+
+/* =======================
+   BUTTONS
+======================= */
+.btn-custom {
+    background: linear-gradient(90deg, #0ea5e9, #0284c7);
+    color: white;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+.btn-custom:hover {
+    background: linear-gradient(90deg, #0284c7, #0ea5e9);
+}
+
+/* =======================
+   RESPONSIVE
+======================= */
+@media (max-width: 991px) {
+    #video_list { max-height: 300px; }
+}
+</style>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'courses/js/course_page.js' %}"></script>
+
+<script>
+/* Background particles */
+for (let i = 0; i < 35; i++) {
+    const p = document.createElement('div');
+    p.className = 'bg-particle';
+    p.style.top = Math.random() * 100 + '%';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = Math.random() * 6 + 4 + 'px';
+    p.style.height = p.style.width;
+    p.style.animationDuration = 6 + Math.random() * 6 + 's';
+    document.body.appendChild(p);
+}
+
+/* Mouse-follow particles */
+document.addEventListener('mousemove', e => {
+    const p = document.createElement('div');
+    p.className = 'mouse-particle';
+    p.style.left = e.clientX + 'px';
+    p.style.top = e.clientY + 'px';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1000);
+});
+
+/* Lecture title click behavior */
+document.querySelectorAll('#video_list .list-group-item').forEach(item => {
+    item.addEventListener('click', () => {
+        // Remove active class from all
+        document.querySelectorAll('#video_list .list-group-item').forEach(i => i.classList.remove('active-video-link-bg'));
+        // Add active class to clicked
+        item.classList.add('active-video-link-bg');
+        // Redirect to video link
+        const link = item.querySelector('a').getAttribute('href');
+        window.location.href = link;
+    });
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- VIDEO PLAYER -->
+        <div class="col-12 col-md-9 mb-3 mb-md-0">
+            <div class="card">
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube.com/embed/{{ video.video_id }}"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen
+                        style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- LECTURE LIST -->
+        <div class="col-12 col-md-3">
+            <div class="card">
+                <h5 class="mb-3 font-weight-bold text-center text-primary">Lectures</h5>
+                <ul id="video_list" class="list-group">
+                    {% is_enrolled request course as enrolled %}
+                    {% for v in videos %}
+                        <li class="list-group-item {% if v == video %} active-video-link-bg {% endif %}">
+                            <a class="{% if not enrolled and not v.is_preview %} no-preview {% endif %}"
+                               href="?lecture={{ v.serial_number }}">
+                                {{ v.title }}
+                            </a>
+                            {% if not enrolled and not v.is_preview %}
+                                <span class="badge badge-locked float-right">Locked</span>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- COURSE DETAILS -->
+    <div class="mt-4">
+        <div class="card">
+            <h3 class="text-primary">{{ course.name }}</h3>
+            <p class="text-gray-600">{{ course.description }}</p>
+        </div>
+
+        {% if course.prerequisite_set.exists %}
+        <div class="card">
+            <h4 class="text-info">Prerequisites</h4>
+            <ol class="mb-0">
+                {% for pre in course.prerequisite_set.all %}
+                    <li>{{ pre.description }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+        {% endif %}
+
+        {% if course.learning_set.exists %}
+        <div class="card">
+            <h4 class="text-success">What You Will Learn</h4>
+            <ol class="mb-0">
+                {% for l in course.learning_set.all %}
+                    <li>{{ l.description }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+{% block content %}
+<h1 class="module">SkyCourse Dashboard</h1>
+
+<div class="dashboard-cards">
+    <div class="scard">
+        <div class="title">Courses</div>
+        <div class="count">{{ app_list|default_if_none:''|length }}</div>
+        <a class="btn" href="{% url 'admin:courses_course_changelist' %}">Manage Courses</a>
+    </div>
+
+    <div class="scard">
+        <div class="title">Users</div>
+        <div class="count">—</div>
+        <a class="btn" href="{% url 'admin:auth_user_changelist' %}">Manage Users</a>
+    </div>
+
+    <div class="scard">
+        <div class="title">Payments</div>
+        <div class="count">—</div>
+        <a class="btn" href="{% url 'admin:courses_payment_changelist' %}">Manage Payments</a>
+    </div>
+
+    <div class="scard">
+        <div class="title">Manual Payments</div>
+        <div class="count">—</div>
+        <a class="btn" href="{% url 'admin:courses_manualpayment_changelist' %}">Manual Payments</a>
+    </div>
+
+    <div class="scard">
+        <div class="title">User Courses</div>
+        <div class="count">—</div>
+        <a class="btn" href="{% url 'admin:courses_usercourse_changelist' %}">User Courses</a>
+    </div>
+</div>
+
+<!-- below: default admin app list for quick access -->
+{% for app in app_list %}
+    <div class="module">
+        <h2>{{ app.name }}</h2>
+        <ul>
+        {% for model in app.models %}
+            <li>
+                <a href="{{ model.admin_url }}">{{ model.name }}</a>
+                {% if model.add_url %} — <a class="addlink" href="{{ model.add_url }}">add</a>{% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endfor %}
+{% endblock %}

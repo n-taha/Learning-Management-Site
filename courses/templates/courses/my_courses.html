@@ -1,0 +1,227 @@
+{% extends 'courses/base.html' %}
+{% load static %}
+{% load course_custom_tags %}
+
+{% block title %}
+My Courses
+{% endblock %}
+
+{% block css %}
+<style>
+/* =======================
+   GLOBAL BACKGROUND
+======================= */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    color: #1f2937;
+    overflow-x: hidden;
+    position: relative;
+    background: linear-gradient(120deg, #e0f2fe, #f0f9ff, #f0f4ff);
+    background-size: 400% 400%;
+    animation: slowGradient 25s ease infinite;
+}
+
+@keyframes slowGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* =======================
+   FLOATING BACKGROUND PARTICLES
+======================= */
+.bg-particle {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: rgba(14,165,233,0.35);
+    border-radius: 50%;
+    animation: particleMove 10s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes particleMove {
+    0%   { transform: translateY(0) translateX(0); opacity: 1; }
+    50%  { transform: translateY(-160px) translateX(60px); opacity: 0.4; }
+    100% { transform: translateY(0) translateX(0); opacity: 1; }
+}
+
+/* =======================
+   PAGE HEADER
+======================= */
+.page-header {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: #0f172a;
+    margin-top: 20px;
+}
+
+/* Profile Icon */
+.profile-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: auto;
+}
+
+/* =======================
+   COURSES CONTAINER
+======================= */
+.courses-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* =======================
+   COURSE CARD PREMIUM
+======================= */
+.course-card {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(14,165,233,0.25);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+    position: relative;
+}
+
+.course-card::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: -30%;
+    width: 160%;
+    height: 160%;
+    background: radial-gradient(circle at center, rgba(14,165,233,0.2), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+}
+
+.course-card:hover::before {
+    opacity: 1;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 28px 60px rgba(0,0,0,0.15);
+}
+
+/* Card image */
+.course-card img {
+    height: 180px;
+    object-fit: cover;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.course-card:hover img {
+    transform: scale(1.07);
+    filter: brightness(1.05);
+}
+
+/* =======================
+   CARD BODY
+======================= */
+.course-card .card-body {
+    padding: 18px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.course-card h5 {
+    color: #0ea5e9;
+    font-weight: 700;
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+}
+
+/* =======================
+   CARD FOOTER BUTTON
+======================= */
+.course-footer {
+    margin-top: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.course-footer .btn {
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background: linear-gradient(90deg, #0ea5e9, #0284c7);
+    color: white;
+}
+
+.course-footer .btn:hover {
+    background: linear-gradient(90deg, #0284c7, #0ea5e9);
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* =======================
+   EMPTY MESSAGE
+======================= */
+.empty-message {
+    text-align: center;
+    font-size: 1.3rem;
+    color: #6b7280;
+    margin-top: 50px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex align-items-center mb-3">
+        <p class="page-header flex-grow-1">My Courses</p>
+        <img src="{% static 'courses/images/profile.png' %}" alt="Profile" class="profile-icon">
+    </div>
+    <hr style="border-top:2px solid #0ea5e9; width:60px; margin:auto; margin-bottom:30px;">
+
+    <div class="courses-container">
+        {% for uc in user_courses %}
+        <div class="course-card card">
+            <img class="card-img-top" src="{{ uc.course.thumbnail.url }}" alt="{{ uc.course.name }}">
+            <div class="card-body">
+                <h5>{{ uc.course.name }}</h5>
+            </div>
+            <div class="card-footer course-footer">
+                <a href="/course/{{ uc.course.slug }}" class="btn w-100">Start Course</a>
+            </div>
+        </div>
+        {% empty %}
+        <p class="empty-message">You are not enrolled in any courses yet. Start learning today!</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+// =======================
+// FLOATING BACKGROUND PARTICLES
+// =======================
+for (let i = 0; i < 35; i++) {
+    const p = document.createElement('div');
+    p.className = 'bg-particle';
+    p.style.top = Math.random() * 100 + '%';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = Math.random() * 6 + 4 + 'px';
+    p.style.height = p.style.width;
+    p.style.animationDuration = 6 + Math.random() * 6 + 's';
+    document.body.appendChild(p);
+}
+</script>
+{% endblock %}
