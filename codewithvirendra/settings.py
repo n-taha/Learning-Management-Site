@@ -77,12 +77,19 @@ WSGI_APPLICATION = 'codewithvirendra.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=config('DATABASE_URL')
+#     )
+# }
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL')
+        # Replace this value with your local database's connection string.
+        default=config('DB_URL'),
+        conn_max_age=600
     )
 }
-
 
 # DATABASES = {
 # #     'default': dj_database_url.parse(
