@@ -77,20 +77,20 @@ WSGI_APPLICATION = 'codewithvirendra.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=config('DATABASE_URL')
-#     )
-# }
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+}
 
 
 DATABASES = {
-    'default': dj_database_url.parse(
-        "postgresql://postgres_gkrq_user:MUhpM90zirTUTqbUAQWQpCwnXvI5zOZD@dpg-d5j1ltili9vc73ami1dg-a/postgres_gkrq",
-        conn_max_age=600,
-        ssl_require=True
-    )
-}
+#     'default': dj_database_url.parse(
+#         "postgresql://postgres_gkrq_user:MUhpM90zirTUTqbUAQWQpCwnXvI5zOZD@dpg-d5j1ltili9vc73ami1dg-a/postgres_gkrq",
+#         conn_max_age=600,
+#         ssl_require=True
+#     )
+# }
 
 
 # DATABASES = {
