@@ -130,6 +130,6 @@ class VideoAdmin(BaseAdmin):
 admin.site.register(AdditionalInfo)
 
 # ---------- Global Admin Customization ----------
-admin.site.site_header = "🌤 SkyCourse Admin"
-admin.site.site_title = "SkyCourse Control"
-admin.site.index_title = "SkyCourse Control Center"
+admin.site.site_header = "🌤 Math World Admin"
+admin.site.site_title = "Math World Control"
+admin.site.index_title = "Math World Control Center"

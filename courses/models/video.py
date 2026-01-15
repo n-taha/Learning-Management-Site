@@ -2,7 +2,7 @@ from django.db import models
 from courses.models import Course
 
 class Video(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100,  )
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     serial_number = models.IntegerField()
     video_id = models.CharField(max_length=100)
