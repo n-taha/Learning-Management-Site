@@ -1,0 +1,234 @@
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\views\generic\edit.py", line 150, in post
+    if form.is_valid():
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\forms\forms.py", line 206, in is_valid
+    return self.is_bound and not self.errors
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\forms\forms.py", line 201, in errors
+    self.full_clean()
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\forms\forms.py", line 338, in full_clean
+    self._clean_form()
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\forms\forms.py", line 354, in _clean_form
+    cleaned_data = self.clean()
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\forms\login_form.py", line 12, in clean
+    email = self.cleaned_data['username']
+KeyError: 'username'
+"POST /login HTTP/1.1" 500 101006
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81362
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81499
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81499
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81499
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81499
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81499
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81499
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81499
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81499
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81499
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81499
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81499
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81499
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81372
+Internal Server Error: /course/math
+Traceback (most recent call last):
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\courses\views\courses.py", line 26, in coursePage
+    video = Video.objects.get(serial_number = serial_number , course = course)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Taha\OneDrive\Desktop\Course Management\Code With Taha\venv\lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+courses.models.video.Video.DoesNotExist: Video matching query does not exist.
+"GET /course/math HTTP/1.1" 500 81362
