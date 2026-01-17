@@ -1,25 +1,36 @@
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
 from django import forms
-from django.contrib.auth import authenticate , login
-from django.forms import ValidationError
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate
+from django.core.exceptions import ValidationError
+from django.contrib.auth import get_user_model
 
-class LoginForm(AuthenticationForm):
-    
-    username = forms.EmailField(max_length=25 , required = True , label='Email Address')
+User = get_user_model()
+
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(label="Email Address")
+    password = forms.CharField(widget=forms.PasswordInput)
 
     def clean(self):
-        email = self.cleaned_data['username']
-        password = self.cleaned_data['password']
-        user = None
-        try:
-            user = User.objects.get(email = email)
-            result = authenticate(username = user.username , password = password)
+        cleaned_data = super().clean()
+        email = cleaned_data.get("email")
+        password = cleaned_data.get("password")
 
-            if(result is not None):
-                return result
-            else:
-                raise ValidationError("Email or Password invalid")
-        except:
-            raise ValidationError("Email or Password invalid")
-        
+        if not email or not password:
+            raise ValidationError("Email and password are required")
+
+        try:
+            user_obj = User.objects.get(email=email)
+        except User.DoesNotExist:
+            raise ValidationError("Email or password invalid")
+
+        user = authenticate(
+            username=user_obj.username,
+            password=password
+        )
+
+        if user is None:
+            raise ValidationError("Email or password invalid")
+
+        cleaned_data["user"] = user
+        return cleaned_data
